@@ -1,0 +1,375 @@
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:    #f5f1eb;
+  --ink:      #1a1814;
+  --mid:      #6b6459;
+  --rule:     #d8d0c4;
+  --accent:   #7a4f2e;
+  --font-ser: 'Cormorant Garamond', Georgia, serif;
+  --font-mon: 'Inconsolata', 'Courier New', monospace;
+  --font-ttl: 'DM Sans', sans-serif;
+
+  /* Layout: text column width + label gutter */
+  --col-text:  660px;
+  --col-label: 160px;
+  --col-gap:   3rem;
+  /* Total content width = label + gap + text */
+  --col-total: calc(var(--col-label) + var(--col-gap) + var(--col-text));
+}
+
+html { font-size: 22px; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-ser);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Sticky Nav ─────────────────────────────────────────────── */
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--cream);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.55rem 2rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.sticky-nav.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.sticky-title {
+  font-family: var(--font-ttl);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.sticky-date {
+  font-family: var(--font-mon);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+}
+
+/* ─── Header ────────────────────────────────────────────────── */
+header {
+  padding: 1rem 0rem 2rem;
+  text-align: center;
+  border-bottom: 3px solid var(--rule);
+}
+
+.header-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.header-label {
+  font-family: var(--font-mon);
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 1.6rem;
+}
+
+h1 {
+  font-family: var(--font-ttl);
+  font-size: clamp(3rem, 10vw, 5.2rem);
+  font-weight: 200;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-family: var(--font-ser);
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 0.4rem;
+}
+
+.date-line {
+  font-family: var(--font-mon);
+  font-size: 0.78rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+/* ─── Main / sections ───────────────────────────────────────── */
+main {
+  padding: 0 2rem;
+}
+
+section {
+  padding: 3rem 0;
+}
+
+/*
+  Narrow: two-column grid (label | body) inside a centred max-width box.
+  Wide (≥ 900px): text column centred on page; label floats into left margin.
+*/
+.section-inner {
+  max-width: var(--col-total);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: var(--col-label) 1fr;
+  gap: 0 var(--col-gap);
+}
+
+@media (min-width: 900px) {
+  .section-inner {
+    max-width: var(--col-text);
+    display: block;
+    position: relative;
+  }
+
+  .section-label {
+    position: absolute;
+    left: calc(-1 * (var(--col-label) + var(--col-gap)));
+    top: 0.25rem;
+    width: var(--col-label);
+    text-align: right;
+  }
+}
+
+@media (max-width: 900px) {
+  .section-inner {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}
+
+.section-label {
+  font-family: var(--font-mon);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding-top: 0.25rem;
+}
+
+.section-body p {
+  margin-bottom: 0.9rem;
+  font-size: 1rem;
+}
+
+.section-body p:last-child { margin-bottom: 0; }
+
+.section-body em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.section-body strong {
+  font-weight: 600;
+}
+
+/* ─── Divider ───────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--rule);
+  max-width: var(--col-text);
+  margin: 0 auto;
+}
+
+@media (max-width: 899px) {
+  .divider {
+    max-width: var(--col-total);
+  }
+}
+
+/* ─── About photo (floated, newspaper-style) ─────────────────── */
+.about-photo {
+  float: right;
+  width: 35%;
+  aspect-ratio: 4 / 5;
+  margin: 0.2rem 1rem 1.2rem 1.6rem;
+  object-fit: cover; /* for real <img> */
+}
+
+/* placeholder version (div) */
+.photo-placeholder-box {
+  border: 1px dashed var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.photo-placeholder-box span {
+  font-family: var(--font-mon);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--rule);
+  line-height: 1.6;
+}
+
+/* clear float after about section body */
+.about .section-body::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* on very narrow screens, let photo go full-width */
+@media (max-width: 480px) {
+  .about-photo {
+    float: none;
+    width: 100%;
+    margin: 0 0 1.2rem 0;
+  }
+}
+
+/* ─── Topics list ───────────────────────────────────────────── */
+.section-body ul {
+  list-style: none;
+  margin-top: 0.6rem;
+}
+
+.section-body ul li {
+  padding: 0.25rem 0;
+  padding-left: 1.1rem;
+  position: relative;
+  font-size: 1rem;
+}
+
+.section-body ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+/* ─── Submit link ───────────────────────────────────────────── */
+.submit-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-family: var(--font-mon);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: opacity 0.2s;
+}
+
+.submit-link:hover { opacity: 0.6; }
+
+/* ─── Dates table ───────────────────────────────────────────── */
+.dates-note {
+  font-family: var(--font-mon);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  margin-bottom: 1rem !important;
+}
+
+.dates-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.96rem;
+}
+
+.dates-table td {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.dates-table tr:first-child td { border-top: 1px solid var(--rule); }
+
+.date-val {
+  font-family: var(--font-mon);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--mid);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.date-highlight .date-event {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.date-highlight .date-val {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+/* ─── Organizers ────────────────────────────────────────────── */
+.org-list {
+  list-style: none;
+}
+ 
+.org-list li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.96rem;
+}
+ 
+.org-list li:first-child { border-top: 1px solid var(--rule); }
+ 
+.org-list strong {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+ 
+.org-list span {
+  font-family: var(--font-mon);
+  font-size: 0.75rem;
+  color: var(--mid);
+  letter-spacing: 0.04em;
+}
+ 
+.org-list strong a {
+  color: inherit;
+  text-decoration: none;
+/*   border-bottom: 1px solid var(--rule); */
+  transition: border-color 0.2s, color 0.2s;
+}
+ 
+.org-list strong a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+/* ─── Footer ────────────────────────────────────────────────── */
+footer {
+  margin-top: 4rem;
+  padding: 2rem;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-family: var(--font-mon);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--rule);
+}
