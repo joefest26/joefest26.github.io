@@ -49,6 +49,13 @@ body {
   pointer-events: none;
 }
 
+.sticky-nav .section-nav{
+  margin-left: 30px;
+  padding-left: 50px;
+  border-left: 1px solid;
+  border-color: var(--mid);
+}
+
 .sticky-nav.visible {
   opacity: 1;
   transform: translateY(0);
@@ -73,9 +80,9 @@ body {
 
 /* ─── Header ────────────────────────────────────────────────── */
 header {
-  padding: 1rem 0rem 2rem;
+  padding: 1rem 0rem 1rem;
   text-align: center;
-  border-bottom: 3px solid var(--rule);
+  border-bottom: 2px solid var(--rule);
 }
 
 .header-inner {
@@ -90,19 +97,19 @@ header {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--mid);
-  margin-bottom: 1.6rem;
+  margin-bottom: .5rem;
 }
 
 h1 {
   font-family: var(--font-ttl);
-  font-size: clamp(3rem, 10vw, 5.2rem);
+  font-size: clamp(1rem, 6vw, 5rem);
   font-weight: 200;
   font-style: normal;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   line-height: 1.05;
   color: var(--ink);
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .subtitle {
@@ -110,15 +117,6 @@ h1 {
   font-size: 1.05rem;
   font-weight: 300;
   color: var(--mid);
-  margin-bottom: 0.4rem;
-}
-
-.date-line {
-  font-family: var(--font-mon);
-  font-size: 0.78rem;
-  font-weight: 300;
-  letter-spacing: 0.1em;
-  color: var(--accent);
 }
 
 /* ─── Main / sections ───────────────────────────────────────── */
@@ -127,6 +125,10 @@ main {
 }
 
 section {
+  padding: 6rem 0;
+}
+
+#about {
   padding: 3rem 0;
 }
 
@@ -238,6 +240,30 @@ section {
   clear: both;
 }
 
+/* ─── Section nav ───────────────────────────────────────────── */
+.section-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+
+.section-nav a {
+  font-family: var(--font-mon);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.section-nav a:hover {
+  color: var(--accent);
+}
+
+
 /* on very narrow screens, let photo go full-width */
 @media (max-width: 480px) {
   .about-photo {
@@ -246,6 +272,11 @@ section {
     margin: 0 0 1.2rem 0;
   }
 }
+
+.section-nav {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
 
 .inline-link {
   color: var(--accent);
