@@ -274,8 +274,8 @@ section {
 }
 
 .section-nav {
-    gap: 1.2rem;
-    flex-wrap: wrap;
+/*     flex-wrap: wrap; */
+  display: none;
   }
 
 .inline-link {
