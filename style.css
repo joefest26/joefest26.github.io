@@ -37,7 +37,7 @@ body {
   right: 0;
   z-index: 100;
   background: var(--cream);
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 4px solid var(--rule);
   padding: 0.55rem 2rem;
   display: flex;
   align-items: baseline;
@@ -82,7 +82,7 @@ body {
 header {
   padding: 1rem 0rem 1rem;
   text-align: center;
-  border-bottom: 2px solid var(--rule);
+  border-bottom: 0px solid var(--rule);
 }
 
 .header-inner {
@@ -270,13 +270,15 @@ section {
     float: none;
     width: 100%;
     margin: 0 0 1.2rem 0;
+    display: none;
   }
-}
+
 
 .section-nav {
 /*     flex-wrap: wrap; */
   display: none;
   }
+}
 
 .inline-link {
   color: var(--accent);
